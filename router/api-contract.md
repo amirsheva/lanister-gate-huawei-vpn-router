@@ -84,15 +84,17 @@ rollback_failed
 
 The switch UI treats `/api/status` + `/api/locations` as authoritative and does not rely on synthetic button clicks.
 
-## Other endpoints
+## Other endpoints consumed by the current v6 UI
 
 ```text
 GET  /api/routing
 GET  /api/config
 GET  /api/security
 GET  /api/logs
-POST /api/config/rollback
 POST /api/action/repair
 POST /api/action/restart
 POST /api/action/stop
 ```
+
+
+> Note: rollback is observed through backend state (`config_op`, `/api/status`, and `/api/locations`). The current v6 UI does not require a separate `/api/config/rollback` call.
