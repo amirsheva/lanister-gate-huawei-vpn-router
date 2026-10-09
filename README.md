@@ -14,6 +14,7 @@ The project grew out of a real home-network deployment where:
 - VPN locations can be switched from a responsive web dashboard.
 
 > **Status:** experimental / reference implementation.  
+> The published `ui/index.html` is the actual LANister Gate v6 dashboard. The VPN engine is currently under active diagnosis because the tunnel is not establishing reliably, so the repository does **not** claim end-to-end VPN connectivity yet.  
 > Tested on one Huawei OptiXstar HS8546X6 environment. Do not assume compatibility with other firmware builds.
 
 ## Highlights
@@ -89,7 +90,6 @@ GET  /api/config
 GET  /api/security
 GET  /api/logs
 POST /api/config/switch
-POST /api/config/rollback
 POST /api/action/repair
 POST /api/action/restart
 POST /api/action/stop
@@ -180,6 +180,18 @@ The focus is:
 4. split routing,
 5. low resource usage,
 6. zero cloud dependency for management.
+
+## Current blocker
+
+The UI/UI-watchdog can be healthy while the VPN engine itself is disconnected. The active investigation checks, in order:
+
+1. whether `openvpn-xor` is running,
+2. whether `tun0` is created,
+3. whether the active profile and `remote` are valid,
+4. whether the VPN watchdog is stuck in failover,
+5. whether policy routing table `250` is rebuilt correctly.
+
+See the open GitHub issue for the live troubleshooting checklist.
 
 ## License
 
