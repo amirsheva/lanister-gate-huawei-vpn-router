@@ -15,6 +15,10 @@
 - Added LANister Gate favicon
 - Preserved Persian/English UI support
 
+### Known issue
+
+- VPN engine connectivity is still under investigation. Dashboard/UI watchdog health must not be treated as proof that the OpenVPN tunnel is connected.
+
 ## 5.x
 
 - Added early location switching UI
