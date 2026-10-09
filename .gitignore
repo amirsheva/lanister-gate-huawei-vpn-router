@@ -1,0 +1,45 @@
+# Secrets / credentials
+**/auth.txt
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/*.crt
+**/*.csr
+.env
+.env.*
+
+# Real VPN profiles
+**/*.ovpn
+!**/*.ovpn.example
+
+# Runtime / state
+**/*.pid
+**/*.state
+**/*.lock
+**/*.log
+**/*.bak
+**/*.backup
+**/*before-*
+**/*.recover
+**/latest
+
+# Router dumps / backups
+**/*.cfg
+**/*.bin
+**/*.img
+**/*.dump
+**/*.tar
+**/*.tgz
+**/*.gz
+
+# Font binaries - keep licensing separate
+**/*.woff
+**/*.woff2
+!ui/assets/fonts/README.md
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

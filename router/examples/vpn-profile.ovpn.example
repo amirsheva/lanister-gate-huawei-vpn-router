@@ -1,0 +1,13 @@
+# Sanitized example only.
+# Do not commit real credentials, certificates, or scramble secrets.
+
+client
+dev tun
+proto tcp-client
+remote vpn.example.invalid 443
+auth-user-pass /mnt/jffs2/app/vpn/auth.txt
+route-nopull
+
+# If your provider requires XOR/scramble, configure it locally.
+# DO NOT commit the real secret:
+# scramble obfuscate CHANGE_ME

@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1a2b">
+<title>LANister Gate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%228%22%20y1%3D%228%22%20x2%3D%2256%22%20y2%3D%2256%22%20gradientUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Cstop%20stop-color%3D%22%2352D7AE%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231789D5%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%223%22%20stdDeviation%3D%223%22%20flood-opacity%3D%22.18%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2256%22%20height%3D%2256%22%20rx%3D%2216%22%20fill%3D%22%230F1A2B%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M18%2040V28c0-7.2%205.8-13%2013-13h2c7.2%200%2013%205.8%2013%2013v12%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20filter%3D%22url%28%23s%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M22%2040h20%22%20stroke%3D%22%23DDF8F0%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2240%22%20r%3D%224%22%20fill%3D%22%2352D7AE%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2246%22%20cy%3D%2240%22%20r%3D%224%22%20fill%3D%22%231789D5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M29%2029h11v6h-5v5h-6V29z%22%20fill%3D%22%23fff%22%2F%3E%0A%3C%2Fsvg%3E%0A">
+<style>
+@font-face{font-family:Kalameh;src:url('/assets/fonts/KalamehWebFaNum-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Kalameh;src:url('/assets/fonts/KalamehWebFaNum-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Kalameh;src:url('/assets/fonts/KalamehWebFaNum-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:Kalameh;src:url('/assets/fonts/KalamehWebFaNum-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Kalameh;src:url('/assets/fonts/KalamehWebFaNum-ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+
+:root{
+  --bg:#f4f7fb; --surface:#ffffff; --surface2:#f8fafc; --surface3:#eef3f8;
+  --text:#111b2f; --muted:#6f7d91; --line:#dce5ef; --line2:#cbd8e6;
+  --green:#168c69; --green2:#52d7ae; --greenSoft:#e8f8f2;
+  --blue:#1486c7; --blue2:#63c7f2; --blueSoft:#eaf6fc;
+  --amber:#c48618; --red:#d64b59; --shadow:0 14px 38px rgba(26,45,73,.08);
+  --shadow2:0 24px 70px rgba(18,35,58,.14); --radius:24px;
+}
+:root[data-theme="dark"]{
+  --bg:#08111f; --surface:#0f1a2b; --surface2:#132136; --surface3:#182941;
+  --text:#edf4fb; --muted:#91a0b5; --line:#263a55; --line2:#36506f;
+  --green:#59ddb4; --green2:#2bb88f; --greenSoft:#112f2b;
+  --blue:#67c8ef; --blue2:#2798d5; --blueSoft:#102d3e;
+  --shadow:0 14px 38px rgba(0,0,0,.22); --shadow2:0 28px 80px rgba(0,0,0,.40);
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark}
+body{margin:0;background:
+  radial-gradient(circle at 92% 3%,rgba(82,215,174,.10),transparent 23rem),
+  radial-gradient(circle at 6% 28%,rgba(99,199,242,.09),transparent 26rem),
+  var(--bg); color:var(--text); font-family:Kalameh,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.mono,[dir=ltr],code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace!important;font-variant-numeric:tabular-nums}
+.shell{width:min(1240px,calc(100% - 34px));margin:auto}
+.hidden{display:none!important}
+.svg-icon{width:24px;height:24px;display:block}
+.iconbox{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--surface3);border:1px solid var(--line)}
+.iconbox.green{background:var(--greenSoft);color:var(--green)}
+.iconbox.blue{background:var(--blueSoft);color:var(--blue)}
+.iconbox.sm{width:36px;height:36px;border-radius:11px}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:7px 11px;font-size:11px;font-weight:700;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);box-shadow:0 0 0 4px rgba(127,145,168,.11)}
+.dot.ok{background:var(--green);box-shadow:0 0 0 4px rgba(82,215,174,.14)}
+.dot.warn{background:var(--amber)}
+.dot.bad{background:var(--red)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:14px;padding:10px 15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;transition:.18s ease}
+.btn:hover{transform:translateY(-1px);border-color:var(--line2);box-shadow:0 8px 22px rgba(31,53,81,.08)}
+.btn.primary{background:linear-gradient(135deg,var(--green2),var(--green));border-color:transparent;color:#06271f}
+:root[data-theme="dark"] .btn.primary{color:#041f18}
+.btn.blue{background:linear-gradient(135deg,var(--blue2),var(--blue));border-color:transparent;color:#051d2a}
+.btn.danger{color:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+header{height:74px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--surface) 84%,transparent);backdrop-filter:blur(16px);position:sticky;top:0;z-index:50}
+.header-in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;direction:ltr}
+.brand-logo{width:44px;height:44px;border-radius:14px;box-shadow:var(--shadow)}
+.brand-copy{line-height:1.05}
+.brand-name{font-size:18px;font-weight:800;letter-spacing:-.4px}
+.brand-sub{font-size:9px;color:var(--muted);margin-top:5px;letter-spacing:.06em;text-transform:uppercase}
+.header-actions{display:flex;gap:8px;direction:ltr}
+.iconbtn{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--text);display:grid;place-items:center;font-weight:800}
+
+main{padding:28px 0 42px}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,var(--surface),var(--surface2));box-shadow:var(--shadow);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:24px;align-items:center}
+.hero:before{content:"";position:absolute;width:430px;height:430px;border-radius:50%;inset-inline-start:-210px;top:-280px;background:radial-gradient(circle,rgba(82,215,174,.13),transparent 68%)}
+.hero-copy{position:relative;z-index:2}
+.eyebrow{font-size:10px;color:var(--green);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.hero-title{font-size:31px;line-height:1.15;margin:8px 0 6px;font-weight:800;letter-spacing:-.8px}
+.hero-desc{color:var(--muted);font-size:13px;max-width:620px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.location-card{position:relative;overflow:hidden;min-height:154px;border-radius:24px;border:1px solid rgba(82,215,174,.28);background:linear-gradient(145deg,var(--surface2),var(--greenSoft));padding:19px;display:grid;grid-template-columns:1fr 92px;gap:15px;align-items:center;cursor:pointer;transition:.18s ease;direction:ltr}
+.location-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.location-card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-70px;bottom:-95px;background:rgba(82,215,174,.12)}
+.location-kicker{font-size:9px;color:var(--green);font-weight:800;letter-spacing:.13em}
+.location-name{font-size:26px;font-weight:800;line-height:1.05;margin-top:5px}
+.location-node{font-size:11px;color:var(--muted);margin-top:8px}
+.location-flag{height:88px;border-radius:20px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:49px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;z-index:1}
+.location-arrow{position:absolute;left:13px;top:12px;width:28px;height:28px;border-radius:9px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:28px 2px 13px}
+.section-title{font-size:18px;font-weight:800}
+.section-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.section-tag{font-size:9px;color:var(--muted)}
+
+.traffic-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.traffic-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,var(--surface),var(--surface2));box-shadow:var(--shadow);padding:20px;min-height:210px}
+.traffic-card.green:before,.traffic-card.blue:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;inset-inline-start:-100px;top:-140px;pointer-events:none}
+.traffic-card.green:before{background:rgba(82,215,174,.10)}
+.traffic-card.blue:before{background:rgba(99,199,242,.10)}
+.traffic-top{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.traffic-title-row{display:flex;align-items:center;gap:10px}
+.traffic-title{font-size:19px;font-weight:800}
+.traffic-tech{font-size:11px;color:var(--muted);margin-top:3px}
+.status-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:800;border:1px solid var(--line);background:var(--surface)}
+.status-chip.green{color:var(--green);border-color:rgba(82,215,174,.30);background:var(--greenSoft)}
+.status-chip.blue{color:var(--blue);border-color:rgba(99,199,242,.30);background:var(--blueSoft)}
+.traffic-value-wrap{position:relative;display:flex;align-items:baseline;gap:10px;margin-top:23px;direction:ltr}
+.traffic-value{font-size:48px;line-height:1;font-weight:800;letter-spacing:-1.5px}
+.traffic-card.green .traffic-value{color:var(--green)}
+.traffic-card.blue .traffic-value{color:var(--blue)}
+.traffic-unit{font-size:19px;color:var(--muted);font-weight:600}
+.traffic-approx{font-size:27px;color:var(--muted)}
+.traffic-bar{height:12px;border-radius:99px;background:var(--surface3);overflow:hidden;margin-top:24px;border:1px solid rgba(127,145,168,.08)}
+.traffic-fill{height:100%;width:0;border-radius:inherit;transition:width .5s ease}
+.green .traffic-fill{background:linear-gradient(90deg,var(--green2),var(--green))}
+.blue .traffic-fill{background:linear-gradient(90deg,var(--blue2),var(--blue))}
+.spark{position:absolute;inset-inline-start:0;bottom:0;width:44%;height:64px;opacity:.16;pointer-events:none}
+.green .spark{color:var(--green)}
+.blue .spark{color:var(--blue)}
+
+.dashboard-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px}
+.panel{border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow);padding:20px}
+.panel-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800}
+.panel-sub{font-size:10px;color:var(--muted);margin-top:4px}
+
+.route-canvas{position:relative;margin-top:18px;min-height:250px;border-radius:20px;border:1px solid var(--line);background:
+  linear-gradient(var(--line) 1px,transparent 1px),
+  linear-gradient(90deg,var(--line) 1px,transparent 1px),
+  var(--surface2);background-size:34px 34px;overflow:hidden}
+.route-canvas:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--surface2),transparent 10%,transparent 90%,var(--surface2));pointer-events:none}
+.route-svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.route-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:7 7;animation:dash 18s linear infinite}
+.route-line.green{stroke:var(--green)}
+.route-line.blue{stroke:var(--blue)}
+@keyframes dash{to{stroke-dashoffset:-140}}
+.route-node{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center}
+.route-node .iconbox{box-shadow:0 8px 20px rgba(20,40,66,.08)}
+.route-node b{font-size:11px}.route-node span{font-size:8px;color:var(--muted)}
+.node-lan{right:7%;top:38%}.node-engine{right:42%;top:38%}.node-vpn{left:7%;top:15%}.node-direct{left:7%;bottom:13%}
+.route-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+
+.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.health-card{border:1px solid var(--line);background:var(--surface2);border-radius:18px;padding:13px;min-height:116px}
+.health-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.health-name{font-size:11px;font-weight:800}.health-value{font-size:14px;font-weight:800;margin-top:13px}.health-sub{font-size:9px;color:var(--muted);margin-top:4px;direction:ltr;text-align:right}
+.health-state{width:9px;height:9px;border-radius:50%;background:var(--muted)}.health-state.ok{background:var(--green);box-shadow:0 0 0 4px rgba(82,215,174,.12)}.health-state.warn{background:var(--amber)}.health-state.bad{background:var(--red)}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.footer{padding:25px 0 35px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:9px;direction:ltr}
+
+.toast-wrap{position:fixed;left:20px;bottom:20px;z-index:1000;display:grid;gap:8px;pointer-events:none}
+.toast{min-width:270px;max-width:410px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow2);border-radius:15px;padding:11px 13px;font-size:11px;animation:toastIn .2s ease}
+.toast.ok{border-color:rgba(82,215,174,.34)}.toast.bad{border-color:rgba(214,75,89,.35)}.toast.warn{border-color:rgba(196,134,24,.35)}
+@keyframes toastIn{from{transform:translateY(8px);opacity:0}}
+
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(5,12,22,.62);backdrop-filter:blur(11px);display:grid;place-items:center;padding:22px;overflow:auto}
+.modal{width:min(880px,100%);max-height:min(820px,calc(100vh - 44px));overflow:auto;border:1px solid var(--line2);border-radius:27px;background:var(--surface);box-shadow:var(--shadow2);position:relative}
+.modal-head{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.modal-title{font-size:18px;font-weight:800}.modal-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.modal-close{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);color:var(--text);font-size:20px}
+.modal-body{padding:18px 20px}
+.current-box{display:flex;align-items:center;justify-content:space-between;gap:15px;border:1px solid rgba(82,215,174,.28);background:var(--greenSoft);border-radius:18px;padding:13px 15px}
+.current-info{display:flex;align-items:center;gap:11px}.current-flag{font-size:31px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}.current-label{font-size:9px;color:var(--muted)}.current-name{font-size:13px;font-weight:800;direction:ltr}.active-badge{font-size:8px;font-weight:800;letter-spacing:.08em;color:var(--green);border:1px solid rgba(82,215,174,.35);border-radius:99px;padding:5px 8px;background:var(--surface)}
+.location-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.location-option{position:relative;border:1px solid var(--line);border-radius:18px;background:var(--surface2);padding:14px;display:grid;grid-template-columns:52px 1fr auto;gap:11px;align-items:center;text-align:right;color:var(--text);min-height:92px;transition:.16s ease}
+.location-option:hover{transform:translateY(-2px);border-color:var(--line2)}
+.location-option.selected{border-color:var(--green);box-shadow:0 0 0 2px rgba(82,215,174,.15)}
+.location-option.active{background:linear-gradient(135deg,var(--surface2),var(--greenSoft))}
+.loc-flag{font-size:38px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}.loc-country{font-size:13px;font-weight:800;direction:ltr}.loc-city{font-size:9px;color:var(--muted);margin-top:3px;direction:ltr}.loc-node{font-size:8px;border:1px solid var(--line);border-radius:99px;padding:4px 7px;color:var(--muted);direction:ltr}
+.modal-foot{position:sticky;bottom:0;z-index:5;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:9px}.modal-foot .btn.primary{flex:1}
+
+.switch-progress{margin-top:15px;border:1px solid var(--line);background:var(--surface2);border-radius:20px;padding:16px}
+.progress-head{display:flex;align-items:center;gap:11px}.progress-orb{width:35px;height:35px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--green);animation:spin .85s linear infinite}.progress-orb.done{animation:none;border-color:var(--green);display:grid;place-items:center}.progress-orb.done:after{content:"✓";color:var(--green);font-weight:800}.progress-orb.warn{animation:none;border-color:var(--amber);display:grid;place-items:center}.progress-orb.warn:after{content:"↶";color:var(--amber);font-weight:800}.progress-orb.bad{animation:none;border-color:var(--red);display:grid;place-items:center}.progress-orb.bad:after{content:"!";color:var(--red);font-weight:800}
+@keyframes spin{to{transform:rotate(360deg)}}
+.progress-title{font-size:13px;font-weight:800}.progress-sub{font-size:9px;color:var(--muted);margin-top:3px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:14px}
+.step{position:relative;padding-top:10px;font-size:8px;color:var(--muted);text-align:center}.step:before{content:"";position:absolute;top:0;right:0;left:0;height:4px;border-radius:99px;background:var(--line)}.step.on:before{background:var(--blue)}.step.ok:before{background:var(--green)}.step.bad:before{background:var(--red)}
+.step b{display:block;font-size:9px;color:var(--text);margin-bottom:2px}
+
+.drawer-overlay{position:fixed;inset:0;z-index:450;background:rgba(5,12,22,.45);backdrop-filter:blur(6px)}
+.drawer{position:absolute;top:0;bottom:0;inset-inline-end:0;width:min(520px,94vw);background:var(--surface);border-inline-start:1px solid var(--line);box-shadow:var(--shadow2);overflow:auto;padding:20px}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.drawer-title{font-size:18px;font-weight:800}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tech-item{border:1px solid var(--line);border-radius:16px;background:var(--surface2);padding:12px}.tech-k{font-size:9px;color:var(--muted)}.tech-v{margin-top:6px;font-size:11px;font-weight:700;word-break:break-all}
+.logs{margin-top:14px;border:1px solid var(--line);background:#07101c;color:#cfe8df;border-radius:16px;padding:12px;max-height:270px;overflow:auto;direction:ltr;text-align:left;font:10px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+
+.control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.control-card{border:1px solid var(--line);border-radius:18px;background:var(--surface2);padding:14px;text-align:center}.control-card .iconbox{margin:0 auto 9px}.control-title{font-size:12px;font-weight:800}.control-sub{font-size:9px;color:var(--muted);min-height:34px;margin-top:4px}.control-card .btn{width:100%;margin-top:10px}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}.location-card{min-height:130px}
+  .dashboard-grid{grid-template-columns:1fr}.route-canvas{min-height:240px}
+}
+@media(max-width:680px){
+  .shell{width:min(100% - 22px,1240px)} header{height:66px}.brand-sub{display:none}.brand-logo{width:39px;height:39px}
+  main{padding-top:17px}.hero{padding:17px;border-radius:24px}.hero-title{font-size:25px}.location-card{grid-template-columns:1fr 76px}.location-flag{height:76px;font-size:42px}
+  .traffic-grid{grid-template-columns:1fr}.traffic-card{min-height:195px}.traffic-value{font-size:43px}
+  .location-grid{grid-template-columns:1fr}
+  .modal-overlay{place-items:center;padding:12px}.modal{max-height:calc(100vh - 24px);border-radius:22px}
+  .modal-head,.modal-body,.modal-foot{padding-left:14px;padding-right:14px}
+  .health-grid{grid-template-columns:1fr 1fr}.control-grid{grid-template-columns:1fr}
+  .route-node b{font-size:9px}.node-engine{right:39%}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="shell header-in">
+    <div class="brand">
+      <img class="brand-logo" alt="LANister Gate" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%228%22%20y1%3D%228%22%20x2%3D%2256%22%20y2%3D%2256%22%20gradientUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Cstop%20stop-color%3D%22%2352D7AE%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231789D5%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%223%22%20stdDeviation%3D%223%22%20flood-opacity%3D%22.18%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2256%22%20height%3D%2256%22%20rx%3D%2216%22%20fill%3D%22%230F1A2B%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M18%2040V28c0-7.2%205.8-13%2013-13h2c7.2%200%2013%205.8%2013%2013v12%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20filter%3D%22url%28%23s%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M22%2040h20%22%20stroke%3D%22%23DDF8F0%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2240%22%20r%3D%224%22%20fill%3D%22%2352D7AE%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2246%22%20cy%3D%2240%22%20r%3D%224%22%20fill%3D%22%231789D5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M29%2029h11v6h-5v5h-6V29z%22%20fill%3D%22%23fff%22%2F%3E%0A%3C%2Fsvg%3E%0A">
+      <div class="brand-copy">
+        <div class="brand-name">LANister Gate</div>
+        <div class="brand-sub">Home Network Control Center</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="iconbtn" id="refreshBtn" title="Refresh">↻</button>
+      <button class="iconbtn" id="themeBtn" title="Theme">☾</button>
+      <button class="iconbtn" id="langBtn" title="Language">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow" id="heroEyebrow">NETWORK STATUS</div>
+      <div class="hero-title" id="heroTitle">در حال دریافت وضعیت شبکه…</div>
+      <div class="hero-desc" id="heroDesc">LANister Gate در حال بررسی تونل VPN، مسیر مستقیم ایران و سلامت سرویس‌ها است.</div>
+      <div class="hero-meta">
+        <span class="pill"><span class="dot" id="vpnDot"></span><span id="vpnPill">VPN —</span></span>
+        <span class="pill"><span class="dot" id="healthDot"></span><span id="healthPill">Health —</span></span>
+        <span class="pill mono" dir="ltr" id="updatePill">--:--:--</span>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="controlBtn">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h7M15 18h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="6" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="12" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="13" cy="18" r="2" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span data-i18n="vpnControl">کنترل VPN</span>
+        </button>
+        <button class="btn" id="techBtn">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M18.4 5.6l-2.1 2.1m-8.6 8.6-2.1 2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span data-i18n="technical">جزئیات فنی</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="location-card" id="locationCard">
+      <div>
+        <div class="location-kicker">VPN EXIT</div>
+        <div class="location-name" id="heroCountry">—</div>
+        <div class="location-node mono" id="heroNode">—</div>
+      </div>
+      <div class="location-flag" id="heroFlag">🌐</div>
+      <div class="location-arrow">⌄</div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <div class="section-title" data-i18n="liveTraffic">ترافیک زنده</div>
+      <div class="section-sub" data-i18n="liveTrafficSub">نمایش ساده و خوانای مسیر واقعی ترافیک روتر</div>
+    </div>
+    <div class="section-tag" id="trafficMode">—</div>
+  </div>
+
+  <section class="traffic-grid">
+    <article class="traffic-card green">
+      <svg class="spark" viewBox="0 0 300 80" preserveAspectRatio="none"><polyline id="vpnSpark" fill="none" stroke="currentColor" stroke-width="4" points="0,72 300,72"/></svg>
+      <div class="traffic-top">
+        <div class="traffic-title-row">
+          <div class="iconbox green">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M3.8 12h16.4M12 3.5c2.3 2.4 3.5 5.2 3.5 8.5S14.3 18.1 12 20.5C9.7 18.1 8.5 15.3 8.5 12S9.7 5.9 12 3.5Z" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div>
+            <div class="traffic-title" data-i18n="internationalVpn">بین‌الملل / VPN</div>
+            <div class="traffic-tech mono" dir="ltr">tun0</div>
+          </div>
+        </div>
+        <span class="status-chip green"><span class="dot ok"></span><span id="vpnMood">فعال</span></span>
+      </div>
+      <div class="traffic-value-wrap">
+        <span class="traffic-value" id="vpnRate">۰</span>
+        <span class="traffic-unit" id="vpnUnit">Kb/s</span>
+      </div>
+      <div class="traffic-bar"><div class="traffic-fill" id="vpnFill"></div></div>
+    </article>
+
+    <article class="traffic-card blue">
+      <svg class="spark" viewBox="0 0 300 80" preserveAspectRatio="none"><polyline id="directSpark" fill="none" stroke="currentColor" stroke-width="4" points="0,72 300,72"/></svg>
+      <div class="traffic-top">
+        <div class="traffic-title-row">
+          <div class="iconbox blue">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="10" width="16" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="16" width="16" height="4" rx="1.5" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="6.5" r=".8" fill="currentColor"/><circle cx="7" cy="12.5" r=".8" fill="currentColor"/><circle cx="7" cy="18" r=".8" fill="currentColor"/></svg>
+          </div>
+          <div>
+            <div class="traffic-title" data-i18n="iranDirect">ایران / مستقیم</div>
+            <div class="traffic-tech mono" dir="ltr">ppp258</div>
+          </div>
+        </div>
+        <span class="status-chip blue"><span class="dot ok"></span><span id="directMood">فعال</span></span>
+      </div>
+      <div class="traffic-value-wrap">
+        <span class="traffic-approx" id="directApprox">≈</span>
+        <span class="traffic-value" id="directRate">۰</span>
+        <span class="traffic-unit" id="directUnit">Kb/s</span>
+      </div>
+      <div class="traffic-bar"><div class="traffic-fill" id="directFill"></div></div>
+    </article>
+  </section>
+
+  <section class="dashboard-grid">
+    <article class="panel">
+      <div class="panel-title">
+        <div class="iconbox sm green"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M5 5h5v5H5zM14 14h5v5h-5zM14 5h5v5h-5zM5 14h5v5H5z" stroke="currentColor" stroke-width="1.6"/><path d="M10 7.5h4M16.5 10v4M14 16.5h-4M7.5 14v-4" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div>
+          <div data-i18n="currentRoute">مسیر فعلی</div>
+          <div class="panel-sub" data-i18n="currentRouteSub">نمایش برداری مسیر LAN، سیاست مسیریابی و خروجی‌ها</div>
+        </div>
+      </div>
+      <div class="route-canvas">
+        <svg class="route-svg" viewBox="0 0 1000 300" preserveAspectRatio="none">
+          <path class="route-line green" d="M825 150 C700 150,650 150,565 150 C450 150,390 80,190 75"/>
+          <path class="route-line blue" d="M565 150 C450 150,390 220,190 225"/>
+          <circle cx="565" cy="150" r="7" fill="var(--surface)" stroke="var(--line2)" stroke-width="2"/>
+        </svg>
+        <div class="route-node node-lan">
+          <div class="iconbox"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M4 18h16M6 16V7h12v9" stroke="currentColor" stroke-width="1.7"/><path d="M9 10h6M9 13h6" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <b>LAN</b><span class="mono">192.168.100.0/24</span>
+        </div>
+        <div class="route-node node-engine">
+          <div class="iconbox"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.1 3.2 3.8-.3.3 3.8L21 12l-2.8 2.3-.3 3.8-3.8-.3L12 21l-2.1-3.2-3.8.3-.3-3.8L3 12l2.8-2.3.3-3.8 3.8.3L12 3Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <b>Policy</b><span class="mono">table 250</span>
+        </div>
+        <div class="route-node node-vpn">
+          <div class="iconbox green"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M7 11V8a5 5 0 0110 0v3M6 11h12v9H6z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="15" r="1.5" fill="currentColor"/></svg></div>
+          <b data-i18n="international">بین‌الملل</b><span class="mono">tun0 / VPN</span>
+        </div>
+        <div class="route-node node-direct">
+          <div class="iconbox blue"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M4 15c3-5 6-7 9-7 2.6 0 4.7 1.2 7 4" stroke="currentColor" stroke-width="1.8"/><path d="M15 5l5 7-8 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <b data-i18n="iran">ایران</b><span class="mono">ppp258 / Direct</span>
+        </div>
+      </div>
+      <div class="route-legend">
+        <span class="pill"><span class="dot ok"></span><span data-i18n="vpnRoute">مسیر VPN</span></span>
+        <span class="pill"><span class="dot" style="background:var(--blue)"></span><span data-i18n="directRoute">مسیر مستقیم</span></span>
+        <span class="pill mono" id="policyRulePill">rule —</span>
+      </div>
+    </article>
+
+    <aside class="panel">
+      <div class="panel-title">
+        <div class="iconbox sm blue"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-2.6 7.9-7 10-4.4-2.1-7-5.6-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div data-i18n="health">سلامت سیستم</div>
+          <div class="panel-sub" data-i18n="healthSub">سرویس‌های اصلی LANister Gate</div>
+        </div>
+      </div>
+      <div class="health-grid">
+        <div class="health-card"><div class="health-head"><span class="health-name">OpenVPN</span><span class="health-state" id="svcVpnDot"></span></div><div class="health-value" id="svcVpn">—</div><div class="health-sub mono" id="svcVpnSub">PID —</div></div>
+        <div class="health-card"><div class="health-head"><span class="health-name">Watchdog</span><span class="health-state" id="svcWdDot"></span></div><div class="health-value" id="svcWd">—</div><div class="health-sub mono" id="svcWdSub">PID —</div></div>
+        <div class="health-card"><div class="health-head"><span class="health-name">DNS Family</span><span class="health-state" id="svcDnsDot"></span></div><div class="health-value" id="svcDns">Cloudflare</div><div class="health-sub mono">1.1.1.3 / 1.0.0.3</div></div>
+        <div class="health-card"><div class="health-head"><span class="health-name">Route</span><span class="health-state" id="svcRouteDot"></span></div><div class="health-value" id="svcRoute">—</div><div class="health-sub mono" id="svcRouteSub">table 250</div></div>
+      </div>
+      <div class="actions"><button class="btn" id="openLocationBtn" style="flex:1" data-i18n="switchLocation">تغییر موقعیت VPN</button></div>
+    </aside>
+  </section>
+
+  <footer class="footer">
+    <span>LANister Gate · UI v6.0</span>
+    <span>Huawei HS8546X6 · OpenVPN XOR · Split Routing</span>
+  </footer>
+</main>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<div class="modal-overlay hidden" id="locationModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="locationTitle">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="locationTitle" data-i18n="chooseLocation">انتخاب موقعیت VPN</div>
+        <div class="modal-sub" data-i18n="chooseLocationSub">کشور خروجی ترافیک بین‌الملل را انتخاب کنید</div>
+      </div>
+      <button class="modal-close" id="locationClose" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="current-box">
+        <div class="current-info"><div class="current-flag" id="currentFlag">🌐</div><div><div class="current-label" data-i18n="currentConnection">اتصال فعلی</div><div class="current-name" id="currentName">—</div></div></div>
+        <span class="active-badge">ACTIVE</span>
+      </div>
+      <div class="location-grid" id="locationGrid"></div>
+
+      <div class="switch-progress hidden" id="switchProgress">
+        <div class="progress-head">
+          <div class="progress-orb" id="progressOrb"></div>
+          <div><div class="progress-title" id="progressTitle">—</div><div class="progress-sub" id="progressSub">—</div></div>
+        </div>
+        <div class="steps">
+          <div class="step" id="step1"><b data-i18n="stepPrepare">آماده‌سازی</b><span>Profile</span></div>
+          <div class="step" id="step2"><b data-i18n="stepTunnel">تونل</b><span>OpenVPN</span></div>
+          <div class="step" id="step3"><b data-i18n="stepHealth">سلامت</b><span>Route + DNS</span></div>
+          <div class="step" id="step4"><b data-i18n="stepDone">اتصال</b><span>Ready</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" id="locationCancel" data-i18n="cancel">انصراف</button>
+      <button class="btn primary" id="locationConnect" disabled data-i18n="selectLocation">یک موقعیت انتخاب کنید</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="controlModal">
+  <div class="modal" style="width:min(720px,100%)">
+    <div class="modal-head"><div><div class="modal-title" data-i18n="vpnControl">کنترل VPN</div><div class="modal-sub" data-i18n="controlSub">عملیات سرویس VPN و بازیابی اتصال</div></div><button class="modal-close" id="controlClose">×</button></div>
+    <div class="modal-body">
+      <div class="control-grid">
+        <div class="control-card"><div class="iconbox green"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 111.9 5.2M4 17v-5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="control-title" data-i18n="repair">Repair</div><div class="control-sub" data-i18n="repairSub">بررسی و راه‌اندازی مجدد اجزای لازم</div><button class="btn" data-action="repair">Repair</button></div>
+        <div class="control-card"><div class="iconbox blue"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M7 7a7 7 0 119.8 10M7 7v5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="control-title" data-i18n="restart">Restart</div><div class="control-sub" data-i18n="restartSub">راه‌اندازی مجدد تونل و Watchdog</div><button class="btn" data-action="restart">Restart</button></div>
+        <div class="control-card"><div class="iconbox"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><rect x="5" y="5" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/></svg></div><div class="control-title" data-i18n="stop">Stop</div><div class="control-sub" data-i18n="stopSub">خاموش کردن سرویس VPN</div><button class="btn danger" data-action="stop">Stop</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="drawer-overlay hidden" id="techDrawer">
+  <div class="drawer">
+    <div class="drawer-head"><div><div class="drawer-title" data-i18n="technical">جزئیات فنی</div><div class="panel-sub">LANister Gate Diagnostics</div></div><button class="modal-close" id="techClose">×</button></div>
+    <div class="tech-grid">
+      <div class="tech-item"><div class="tech-k">Active config</div><div class="tech-v mono" id="techConfig">—</div></div>
+      <div class="tech-item"><div class="tech-k">Remote</div><div class="tech-v mono" id="techRemote">—</div></div>
+      <div class="tech-item"><div class="tech-k">Protocol</div><div class="tech-v mono" id="techProto">—</div></div>
+      <div class="tech-item"><div class="tech-k">Cipher</div><div class="tech-v mono" id="techCipher">—</div></div>
+      <div class="tech-item"><div class="tech-k">Server CN</div><div class="tech-v mono" id="techCn">—</div></div>
+      <div class="tech-item"><div class="tech-k">Iran prefixes</div><div class="tech-v mono" id="techIran">—</div></div>
+      <div class="tech-item"><div class="tech-k">IPv4 Firewall</div><div class="tech-v mono" id="techFw4">—</div></div>
+      <div class="tech-item"><div class="tech-k">IPv6 Firewall</div><div class="tech-v mono" id="techFw6">—</div></div>
+    </div>
+    <div class="section-head" style="margin-top:18px"><div><div class="section-title" style="font-size:14px">Logs</div><div class="section-sub">Recent OpenVPN / service events</div></div><button class="btn" id="reloadLogs">↻</button></div>
+    <pre class="logs" id="logsBox">—</pre>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+const $=id=>document.getElementById(id);
+let lang=localStorage.getItem('lanister.lang')||'fa';
+let theme=localStorage.getItem('lanister.theme')||'light';
+let csrf='';
+let lastStatus=null;
+let previous=null,previousTs=0;
+let vpnHistory=[],directHistory=[];
+let selectedProfile='',activeProfile='',switchBusy=false,switchToken=0;
+
+const I18N={
+fa:{
+  vpnControl:'کنترل VPN',technical:'جزئیات فنی',liveTraffic:'ترافیک زنده',liveTrafficSub:'نمایش ساده و خوانای مسیر واقعی ترافیک روتر',
+  internationalVpn:'بین‌الملل / VPN',iranDirect:'ایران / مستقیم',currentRoute:'مسیر فعلی',currentRouteSub:'نمایش برداری مسیر LAN، سیاست مسیریابی و خروجی‌ها',
+  international:'بین‌الملل',iran:'ایران',vpnRoute:'مسیر VPN',directRoute:'مسیر مستقیم',health:'سلامت سیستم',healthSub:'سرویس‌های اصلی LANister Gate',
+  switchLocation:'تغییر موقعیت VPN',chooseLocation:'انتخاب موقعیت VPN',chooseLocationSub:'کشور خروجی ترافیک بین‌الملل را انتخاب کنید',
+  currentConnection:'اتصال فعلی',cancel:'انصراف',selectLocation:'یک موقعیت انتخاب کنید',connectTo:'اتصال به',
+  stepPrepare:'آماده‌سازی',stepTunnel:'تونل',stepHealth:'سلامت',stepDone:'اتصال',
+  controlSub:'عملیات سرویس VPN و بازیابی اتصال',repair:'بازیابی',repairSub:'بررسی و راه‌اندازی مجدد اجزای لازم',restart:'راه‌اندازی مجدد',restartSub:'راه‌اندازی مجدد تونل و Watchdog',stop:'توقف',stopSub:'خاموش کردن سرویس VPN',
+  connected:'VPN متصل است',connectedDesc:'ترافیک بین‌الملل از تونل VPN عبور می‌کند و ترافیک ایران مستقیم است.',
+  failover:'VPN در حالت پشتیبان است',failoverDesc:'مسیر VPN سالم نیست و روتر از مسیر مستقیم پشتیبان استفاده می‌کند.',
+  stopped:'VPN متوقف است',stoppedDesc:'سرویس VPN خاموش است.',connecting:'در حال اتصال VPN…',connectingDesc:'تونل در حال راه‌اندازی و بررسی سلامت است.',
+  error:'وضعیت VPN نامشخص است',errorDesc:'LANister Gate نتوانست وضعیت پایدار VPN را تأیید کند.',
+  active:'فعال',calm:'آرام',low:'کم',medium:'متوسط',high:'زیاد',estimated:'تخمینی',exact:'دقیق',
+  preparing:'آماده‌سازی پروفایل',saving:'ذخیره اتصال فعلی و ارسال درخواست تغییر',applying:'اعمال تنظیمات',starting:'راه‌اندازی تونل OpenVPN',
+  checking:'بررسی سلامت تونل',checkingSub:'بررسی tun0، table 250، Watchdog و مسیر خروجی',
+  success:'اتصال با موفقیت برقرار شد',successSub:'سرور جدید فعال و تونل سالم است.',
+  restoring:'اتصال جدید ناموفق بود؛ در حال بازگردانی',restoringSub:'پروفایل سالم قبلی دوباره فعال می‌شود.',
+  restored:'اتصال قبلی با موفقیت بازگردانی شد',restoredSub:'VPN سالم قبلی دوباره فعال است.',
+  failed:'تغییر موقعیت VPN ناموفق بود',failedSub:'وضعیت روتر را بررسی کنید و دوباره تلاش کنید.',
+  timeout:'زمان عملیات به پایان رسید',timeoutSub:'عملیات Backend ممکن است ادامه داشته باشد؛ وضعیت فعلی را بررسی کنید.',
+  close:'بستن',retry:'تلاش مجدد',operationStarted:'عملیات شروع شد',backendError:'ارتباط با Backend برقرار نیست'
+},
+en:{
+  vpnControl:'VPN Control',technical:'Technical details',liveTraffic:'Live traffic',liveTrafficSub:'Readable view of the router traffic paths',
+  internationalVpn:'International / VPN',iranDirect:'Iran / Direct',currentRoute:'Current route',currentRouteSub:'Vector view of LAN, policy routing and exits',
+  international:'International',iran:'Iran',vpnRoute:'VPN route',directRoute:'Direct route',health:'System health',healthSub:'Core LANister Gate services',
+  switchLocation:'Switch VPN location',chooseLocation:'Choose VPN location',chooseLocationSub:'Choose the exit country for international traffic',
+  currentConnection:'Current connection',cancel:'Cancel',selectLocation:'Select a location',connectTo:'Connect to',
+  stepPrepare:'Prepare',stepTunnel:'Tunnel',stepHealth:'Health',stepDone:'Connected',
+  controlSub:'VPN service actions and recovery',repair:'Repair',repairSub:'Check and restart required components',restart:'Restart',restartSub:'Restart tunnel and watchdog',stop:'Stop',stopSub:'Stop the VPN service',
+  connected:'VPN is connected',connectedDesc:'International traffic uses the VPN tunnel while Iran traffic remains direct.',
+  failover:'VPN is on fallback',failoverDesc:'The VPN path is unhealthy and the router is using its direct fallback.',
+  stopped:'VPN is stopped',stoppedDesc:'The VPN service is disabled.',connecting:'Connecting VPN…',connectingDesc:'The tunnel is starting and being health-checked.',
+  error:'VPN state is unknown',errorDesc:'LANister Gate could not confirm a stable VPN state.',
+  active:'Active',calm:'Calm',low:'Low',medium:'Medium',high:'High',estimated:'Estimated',exact:'Exact',
+  preparing:'Preparing profile',saving:'Saving the current connection and starting the switch',applying:'Applying configuration',starting:'Starting OpenVPN tunnel',
+  checking:'Checking tunnel health',checkingSub:'Validating tun0, table 250, watchdog and exit path',
+  success:'Connection established',successSub:'The new server is active and healthy.',
+  restoring:'New connection failed — restoring',restoringSub:'The last known-good profile is being restored.',
+  restored:'Previous connection restored',restoredSub:'The previous healthy VPN is active again.',
+  failed:'VPN location switch failed',failedSub:'Check router status and try again.',
+  timeout:'Operation timed out',timeoutSub:'The backend may still be working; check current status.',
+  close:'Close',retry:'Retry',operationStarted:'Operation started',backendError:'Backend unavailable'
+}
+};
+const t=k=>(I18N[lang]&&I18N[lang][k])||k;
+
+function applyLanguage(){
+  document.documentElement.lang=lang; document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  $('langBtn').textContent=lang==='fa'?'EN':'فا';
+  if(lastStatus) renderStatus(lastStatus);
+}
+function applyTheme(){
+  document.documentElement.dataset.theme=theme;
+  $('themeBtn').textContent=theme==='dark'?'☀':'☾';
+}
+function faDigits(s){return String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
+function localNum(n,opt={}){
+  try{return new Intl.NumberFormat(lang==='fa'?'fa-IR':'en-US',opt).format(n)}
+  catch{return String(n)}
+}
+function toast(msg,type='ok',ms=3200){
+  const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;$('toastWrap').appendChild(el);
+  setTimeout(()=>el.remove(),ms);
+}
+function setDot(id,state){
+  const e=$(id); if(!e)return; e.className='dot '+(state==='ok'?'ok':state==='warn'?'warn':state==='bad'?'bad':'');
+}
+function setHealthDot(id,state){
+  const e=$(id);if(!e)return;e.className='health-state '+(state==='ok'?'ok':state==='warn'?'warn':state==='bad'?'bad':'');
+}
+function statusCopy(s){
+  const st=(s&&s.status)||'error';
+  if(st==='connected')return[t('connected'),t('connectedDesc')];
+  if(st==='failover')return[t('failover'),t('failoverDesc')];
+  if(st==='stopped')return[t('stopped'),t('stoppedDesc')];
+  if(st==='connecting'||st==='starting')return[t('connecting'),t('connectingDesc')];
+  return[t('error'),t('errorDesc')];
+}
+function locMeta(raw){
+  raw=String(raw||'');
+  const rules=[
+    [/germany|de1/i,'🇩🇪','Germany','DE','Frankfurt','de1'],
+    [/netherlands|amsterdam|nl1/i,'🇳🇱','Netherlands','NL','Amsterdam','nl1'],
+    [/uk[_ -]?london|united kingdom|uk1/i,'🇬🇧','United Kingdom','GB','London','uk1'],
+    [/switzerland|ch1/i,'🇨🇭','Switzerland','CH','Zurich','ch1'],
+    [/us-east|new.?york|united states|us4/i,'🇺🇸','United States','US','New York','us4'],
+    [/singapore|sg1/i,'🇸🇬','Singapore','SG','Singapore','sg1'],
+    [/japan|jp1/i,'🇯🇵','Japan','JP','Tokyo','jp1'],
+    [/romania|ro2/i,'🇷🇴','Romania','RO','Bucharest','ro2']
+  ];
+  for(const r of rules)if(r[0].test(raw))return{flag:r[1],country:r[2],code:r[3],city:r[4],node:r[5],key:r[2]};
+  return{flag:'🌐',country:raw.replace('.ovpn','').replace(/[_-]/g,' ')||'VPN',code:'VPN',city:'',node:'',key:raw};
+}
+function dedupeProfiles(loc){
+  const map=new Map();
+  for(const f of loc.locations||[]){
+    const m=locMeta(f);
+    if(!map.has(m.key)||f===loc.active)map.set(m.key,f);
+  }
+  return [...map.values()];
+}
+function mood(rate){
+  if(rate<64000)return t('calm'); if(rate<800000)return t('low'); if(rate<5000000)return t('medium'); return t('high');
+}
+function rateParts(bits){
+  let v=bits,unit='b/s';
+  if(bits>=1e6){v=bits/1e6;unit='Mb/s'} else if(bits>=1e3){v=bits/1e3;unit='Kb/s'}
+  const decimals=v>=100?0:v>=10?1:v>=1?1:0;
+  return{value:localNum(v,{minimumFractionDigits:decimals,maximumFractionDigits:decimals}),unit};
+}
+function setSpark(id,arr){
+  const e=$(id); if(!e)return;
+  if(arr.length<2){e.setAttribute('points','0,72 300,72');return}
+  const mx=Math.max(1,...arr),n=arr.length;
+  const pts=arr.map((v,i)=>`${(i/(Math.max(29,n-1))*300).toFixed(1)},${(72-(v/mx)*58).toFixed(1)}`).join(' ');
+  e.setAttribute('points',pts);
+}
+function updateTraffic(s){
+  const now=Date.now();
+  if(previous&&previousTs){
+    const dt=Math.max(.5,(now-previousTs)/1000);
+    const vpnRx=Math.max(0,(+s.vpn_rx_bytes-(+previous.vpn_rx_bytes))*8/dt);
+    const vpnTx=Math.max(0,(+s.vpn_tx_bytes-(+previous.vpn_tx_bytes))*8/dt);
+    const wanRx=Math.max(0,(+s.wan_rx_bytes-(+previous.wan_rx_bytes))*8/dt);
+    const wanTx=Math.max(0,(+s.wan_tx_bytes-(+previous.wan_tx_bytes))*8/dt);
+    let directRx,directTx,estimated=s.traffic_mode!=='exact'||s.status!=='connected';
+    if(s.traffic_mode==='exact'&&s.status==='connected'){
+      directRx=Math.max(0,(+s.direct_rx_bytes-(+previous.direct_rx_bytes))*8/dt);
+      directTx=Math.max(0,(+s.direct_tx_bytes-(+previous.direct_tx_bytes))*8/dt);estimated=false;
+    }else if(s.status==='connected'){
+      directRx=Math.max(0,wanRx-vpnRx*1.04);directTx=Math.max(0,wanTx-vpnTx*1.04);
+      const cut=Math.max(64000,(vpnRx+vpnTx)*.055);if(directRx+directTx<cut){directRx=0;directTx=0}
+    }else{directRx=wanRx;directTx=wanTx}
+    const v=vpnRx+vpnTx,d=directRx+directTx,scale=Math.max(1,v,d);
+    const vp=rateParts(v),dp=rateParts(d);
+    $('vpnRate').textContent=vp.value;$('vpnUnit').textContent=vp.unit;$('vpnMood').textContent=mood(v);$('vpnFill').style.width=Math.max(v>1000?5:0,Math.min(100,v/scale*100))+'%';
+    $('directRate').textContent=dp.value;$('directUnit').textContent=dp.unit;$('directMood').textContent=mood(d);$('directApprox').classList.toggle('hidden',!estimated);$('directFill').style.width=Math.max(d>1000?5:0,Math.min(100,d/scale*100))+'%';
+    vpnHistory.push(v);directHistory.push(d);if(vpnHistory.length>30)vpnHistory.shift();if(directHistory.length>30)directHistory.shift();setSpark('vpnSpark',vpnHistory);setSpark('directSpark',directHistory);
+  }
+  previous={...s};previousTs=now;
+}
+function renderStatus(s){
+  lastStatus=s;csrf=s.csrf||csrf;
+  const c=statusCopy(s);$('heroTitle').textContent=c[0];$('heroDesc').textContent=c[1];
+  const connected=s.status==='connected';const healthy=s.health_state==='healthy';
+  setDot('vpnDot',connected?'ok':s.status==='failover'?'warn':'bad');setDot('healthDot',healthy?'ok':s.health_state==='failover'?'warn':'bad');
+  $('vpnPill').textContent='VPN · '+(connected?t('active'):s.status||'—');$('healthPill').textContent='Health · '+(s.health_state||'—');
+  $('updatePill').textContent=new Date().toLocaleTimeString(lang==='fa'?'fa-IR':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const m=locMeta(s.location);$('heroFlag').textContent=m.flag;$('heroCountry').textContent=m.country;$('heroNode').textContent=m.code+(m.node?' · '+m.node:'');
+  $('trafficMode').textContent=s.traffic_mode==='exact'?t('exact'):t('estimated');
+  $('svcVpn').textContent=s.openvpn_pid?t('active'):'—';$('svcVpnSub').textContent='PID '+(s.openvpn_pid||'—');setHealthDot('svcVpnDot',s.openvpn_pid?'ok':'bad');
+  $('svcWd').textContent=s.watchdog_pid?t('active'):'—';$('svcWdSub').textContent='PID '+(s.watchdog_pid||'—');setHealthDot('svcWdDot',s.watchdog_pid?'ok':'bad');
+  $('svcDns').textContent='Cloudflare Family';setHealthDot('svcDnsDot',connected?'ok':'warn');
+  $('svcRoute').textContent=s.default_dev||'—';$('svcRouteSub').textContent=(s.default_dev||'—')+' / table 250';setHealthDot('svcRouteDot',s.default_dev==='tun0'?'ok':s.default_dev==='ppp258'?'warn':'bad');
+  updateTraffic(s);
+}
+async function api(path,opt){
+  const r=await fetch(path,Object.assign({cache:'no-store'},opt||{}));let data=null;
+  const ct=r.headers.get('content-type')||'';try{data=ct.includes('json')?await r.json():await r.text()}catch{}
+  if(!r.ok){const err=new Error((data&&data.code)||('HTTP '+r.status));err.status=r.status;err.data=data;throw err}return data;
+}
+async function post(path,body=''){
+  if(!csrf){const s=await api('/api/status');renderStatus(s)}
+  return api(path,{method:'POST',headers:{'X-VPN-CSRF':csrf,'Content-Type':'text/plain;charset=utf-8'},body});
+}
+async function refresh(manual=false){
+  try{const s=await api('/api/status');renderStatus(s);if(manual)toast(lang==='fa'?'وضعیت به‌روز شد':'Status refreshed','ok');return s}
+  catch(e){if(manual)toast(t('backendError'),'bad');return null}
+}
+async function loadRouting(){
+  try{const x=await api('/api/routing');$('policyRulePill').textContent=x.policy_rule||'rule —';$('techIran').textContent=x.iran_count||'—'}catch{}
+}
+async function loadTech(){
+  try{const [c,r,s,l]=await Promise.all([api('/api/config'),api('/api/routing'),api('/api/security'),api('/api/logs')]);
+    $('techConfig').textContent=c.active_file||'—';$('techRemote').textContent=c.remote||'—';$('techProto').textContent=c.proto||'—';$('techCipher').textContent=c.cipher||'—';$('techCn').textContent=c.server_cn||'—';
+    $('techIran').textContent=r.iran_count||'—';$('techFw4').textContent=s.ipv4||'—';$('techFw6').textContent=s.ipv6||'—';$('logsBox').textContent=typeof l==='string'?l:JSON.stringify(l,null,2);
+  }catch(e){toast(t('backendError'),'bad')}
+}
+function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden'}
+function closeModal(id){$(id).classList.add('hidden');if(!document.querySelector('.modal-overlay:not(.hidden),.drawer-overlay:not(.hidden)'))document.body.style.overflow=''}
+function setCurrentBox(location){const m=locMeta(location);$('currentFlag').textContent=m.flag;$('currentName').textContent=m.country+(m.node?' · '+m.node:'')}
+function renderLocationGrid(loc,status){
+  activeProfile=loc.active||'';setCurrentBox(status.location||loc.active||'');selectedProfile='';
+  const grid=$('locationGrid');grid.innerHTML='';
+  for(const file of dedupeProfiles(loc)){
+    const m=locMeta(file),active=file===activeProfile;
+    const b=document.createElement('button');b.type='button';b.className='location-option'+(active?' active':'');b.dataset.file=file;
+    b.innerHTML=`<div class="loc-flag">${m.flag}</div><div><div class="loc-country">${m.country}</div><div class="loc-city">${m.city}</div></div><div class="loc-node">${m.node||'VPN'}</div>`;
+    if(active){const badge=document.createElement('span');badge.className='active-badge';badge.textContent='ACTIVE';badge.style.position='absolute';badge.style.insetInlineStart='9px';badge.style.top='9px';b.appendChild(badge)}
+    b.onclick=()=>{if(switchBusy)return;grid.querySelectorAll('.location-option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedProfile=file;const bm=locMeta(file);$('locationConnect').disabled=active;$('locationConnect').textContent=active?(lang==='fa'?'همین اتصال فعال است':'Already connected'):(t('connectTo')+' '+bm.country)};
+    grid.appendChild(b);
+  }
+  $('locationConnect').disabled=true;$('locationConnect').textContent=t('selectLocation');
+}
+async function openLocations(){
+  openModal('locationModal');resetSwitchUi();
+  $('locationGrid').innerHTML='<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)">Loading…</div>';
+  try{const [s,l]=await Promise.all([api('/api/status'),api('/api/locations')]);renderStatus(s);renderLocationGrid(l,s)}
+  catch(e){$('locationGrid').innerHTML='<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--red)">'+t('backendError')+'</div>'}
+}
+function resetSwitchUi(){
+  switchBusy=false;$('switchProgress').classList.add('hidden');$('progressOrb').className='progress-orb';$('locationClose').disabled=false;$('locationCancel').disabled=false;
+  ['step1','step2','step3','step4'].forEach(id=>$(id).className='step');
+}
+function setProgress(type,title,sub,stage){
+  $('switchProgress').classList.remove('hidden');$('progressTitle').textContent=title;$('progressSub').textContent=sub||'';
+  $('progressOrb').className='progress-orb'+(type?' '+type:'');
+  ['step1','step2','step3','step4'].forEach((id,i)=>{$(id).className='step'+(i+1<stage?' ok':i+1===stage?(type==='bad'?' bad':type==='done'?' ok':' on'):'')});
+}
+async function connectSelected(){
+  if(!selectedProfile||selectedProfile===activeProfile||switchBusy)return;
+  const target=selectedProfile,targetMeta=locMeta(target),token=++switchToken;switchBusy=true;
+  $('locationConnect').disabled=true;$('locationClose').disabled=true;$('locationCancel').disabled=true;
+  setProgress('',t('preparing'),t('saving'),1);
+  let baseline;
+  try{baseline=await api('/api/status');await post('/api/config/switch',target)}
+  catch(e){switchBusy=false;$('locationClose').disabled=false;$('locationCancel').disabled=false;$('locationConnect').disabled=false;setProgress('bad',t('failed'),e.message,1);return}
+  const before=(baseline.config_op||'idle||0').split('|');const beforeStamp=before[2]||'0';const deadline=Date.now()+90000;
+  while(Date.now()<deadline&&token===switchToken){
+    await new Promise(r=>setTimeout(r,1000));
+    let s,l;try{[s,l]=await Promise.all([api('/api/status'),api('/api/locations')]);renderStatus(s)}catch{continue}
+    const op=String(s.config_op||'idle||0').split('|'),state=op[0]||'',val=op[1]||'',stamp=op[2]||'0',fresh=stamp!==beforeStamp;
+    if(l.active===target&&s.status==='connected'&&s.health_state==='healthy'&&s.default_dev==='tun0'){
+      setProgress('done',t('success'),targetMeta.country+' · '+t('successSub'),4);activeProfile=target;setCurrentBox(s.location||target);
+      setTimeout(()=>{if(token===switchToken){closeModal('locationModal');resetSwitchUi();refresh()}},1600);return;
+    }
+    if(fresh&&state==='rollback_ok'&&l.active!==target){
+      setProgress('warn',t('restored'),t('restoredSub'),4);activeProfile=l.active||activeProfile;
+      setTimeout(()=>{if(token===switchToken){closeModal('locationModal');resetSwitchUi();refresh()}},2400);return;
+    }
+    if(fresh&&(state==='rollback_failed'||state==='failed')){
+      switchBusy=false;$('locationClose').disabled=false;$('locationCancel').disabled=false;$('locationConnect').disabled=false;setProgress('bad',t('failed'),t('failedSub'),4);return;
+    }
+    if(fresh&&state==='applying'&&val==='auto_rollback'){setProgress('warn',t('restoring'),t('restoringSub'),4);continue}
+    if(fresh&&state==='applying'){setProgress('',t('applying'),targetMeta.country,1);continue}
+    if(fresh&&state==='starting'){setProgress('',t('starting'),targetMeta.country,2);continue}
+    if(s.status==='connected'&&s.default_dev==='tun0'){setProgress('',t('checking'),t('checkingSub'),3);continue}
+    setProgress('',t('starting'),targetMeta.country,2);
+  }
+  if(token===switchToken){switchBusy=false;$('locationClose').disabled=false;$('locationCancel').disabled=false;$('locationConnect').disabled=false;setProgress('bad',t('timeout'),t('timeoutSub'),4)}
+}
+async function runAction(kind){
+  if(kind==='stop'&&!confirm(lang==='fa'?'VPN متوقف شود؟':'Stop VPN?'))return;
+  try{await post('/api/action/'+kind);toast(t('operationStarted'),'ok');closeModal('controlModal');for(let i=0;i<24;i++){await new Promise(r=>setTimeout(r,1200));const s=await refresh();if(!s)continue;if(kind==='stop'&&s.status==='stopped')break;if(kind!=='stop'&&s.status==='connected')break}}
+  catch(e){toast(e.message||t('backendError'),'bad')}
+}
+
+$('langBtn').onclick=()=>{lang=lang==='fa'?'en':'fa';localStorage.setItem('lanister.lang',lang);applyLanguage()};
+$('themeBtn').onclick=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('lanister.theme',theme);applyTheme()};
+$('refreshBtn').onclick=()=>refresh(true);
+$('locationCard').onclick=openLocations;$('openLocationBtn').onclick=openLocations;
+$('locationClose').onclick=()=>{if(!switchBusy)closeModal('locationModal')};$('locationCancel').onclick=()=>{if(!switchBusy)closeModal('locationModal')};$('locationConnect').onclick=connectSelected;
+$('locationModal').onclick=e=>{if(e.target===$('locationModal')&&!switchBusy)closeModal('locationModal')};
+$('controlBtn').onclick=()=>openModal('controlModal');$('controlClose').onclick=()=>closeModal('controlModal');$('controlModal').onclick=e=>{if(e.target===$('controlModal'))closeModal('controlModal')};
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>runAction(b.dataset.action));
+$('techBtn').onclick=()=>{openModal('techDrawer');loadTech()};$('techClose').onclick=()=>closeModal('techDrawer');$('techDrawer').onclick=e=>{if(e.target===$('techDrawer'))closeModal('techDrawer')};$('reloadLogs').onclick=loadTech;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!switchBusy){closeModal('locationModal');closeModal('controlModal');closeModal('techDrawer')}});
+
+applyTheme();applyLanguage();refresh();loadRouting();setInterval(()=>refresh(),3000);setInterval(()=>loadRouting(),30000);
+})();
+</script>
+</body>
+</html>
