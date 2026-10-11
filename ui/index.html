@@ -486,7 +486,7 @@ fa:{
   connected:'VPN متصل است',connectedDesc:'ترافیک بین‌الملل از تونل VPN عبور می‌کند و ترافیک ایران مستقیم است.',
   failover:'VPN در حالت پشتیبان است',failoverDesc:'مسیر VPN سالم نیست و روتر از مسیر مستقیم پشتیبان استفاده می‌کند.',
   stopped:'VPN متوقف است',stoppedDesc:'سرویس VPN خاموش است.',connecting:'در حال اتصال VPN…',connectingDesc:'تونل در حال راه‌اندازی و بررسی سلامت است.',
-  error:'وضعیت VPN نامشخص است',errorDesc:'LANister Gate نتوانست وضعیت پایدار VPN را تأیید کند.',
+  degraded:'VPN نیاز به بررسی دارد',degradedDesc:'تونل، مسیر یا Health با هم سازگار نیستند؛ جزئیات فنی را بررسی کنید.',error:'وضعیت VPN نامشخص است',errorDesc:'LANister Gate نتوانست وضعیت پایدار VPN را تأیید کند.',
   active:'فعال',calm:'آرام',low:'کم',medium:'متوسط',high:'زیاد',estimated:'تخمینی',exact:'دقیق',
   preparing:'آماده‌سازی پروفایل',saving:'ذخیره اتصال فعلی و ارسال درخواست تغییر',applying:'اعمال تنظیمات',starting:'راه‌اندازی تونل OpenVPN',
   checking:'بررسی سلامت تونل',checkingSub:'بررسی tun0، table 250، Watchdog و مسیر خروجی',
@@ -509,7 +509,7 @@ en:{
   connected:'VPN is connected',connectedDesc:'International traffic uses the VPN tunnel while Iran traffic remains direct.',
   failover:'VPN is on fallback',failoverDesc:'The VPN path is unhealthy and the router is using its direct fallback.',
   stopped:'VPN is stopped',stoppedDesc:'The VPN service is disabled.',connecting:'Connecting VPN…',connectingDesc:'The tunnel is starting and being health-checked.',
-  error:'VPN state is unknown',errorDesc:'LANister Gate could not confirm a stable VPN state.',
+  degraded:'VPN needs attention',degradedDesc:'Tunnel, route, or health state is inconsistent; check technical details.',error:'VPN state is unknown',errorDesc:'LANister Gate could not confirm a stable VPN state.',
   active:'Active',calm:'Calm',low:'Low',medium:'Medium',high:'High',estimated:'Estimated',exact:'Exact',
   preparing:'Preparing profile',saving:'Saving the current connection and starting the switch',applying:'Applying configuration',starting:'Starting OpenVPN tunnel',
   checking:'Checking tunnel health',checkingSub:'Validating tun0, table 250, watchdog and exit path',
@@ -554,6 +554,7 @@ function statusCopy(s){
   if(st==='failover')return[t('failover'),t('failoverDesc')];
   if(st==='stopped')return[t('stopped'),t('stoppedDesc')];
   if(st==='connecting'||st==='starting')return[t('connecting'),t('connectingDesc')];
+  if(st==='degraded')return[t('degraded'),t('degradedDesc')];
   return[t('error'),t('errorDesc')];
 }
 function locMeta(raw){
@@ -660,10 +661,19 @@ function renderTruth(s){
 }
 function renderStatus(s){
   lastStatus=s;csrf=s.csrf||csrf;
-  const c=statusCopy(s);$('heroTitle').textContent=c[0];$('heroDesc').textContent=c[1];
-  const connected=s.status==='connected';const healthy=s.health_state==='healthy';
-  setDot('vpnDot',connected?'ok':s.status==='failover'?'warn':'bad');setDot('healthDot',healthy?'ok':s.health_state==='failover'?'warn':'bad');
-  $('vpnPill').textContent='VPN · '+(connected?t('active'):s.status||'—');$('healthPill').textContent='Health · '+(s.health_state||'—');
+  const healthy=s.health_state==='healthy';
+  const engineUp=!!s.openvpn_pid, tunUp=!!s.tun_ip, vpnRoute=s.default_dev==='tun0', directRoute=s.default_dev==='ppp258';
+  let effectiveStatus=s.status||'error';
+  if(!engineUp&&!tunUp) effectiveStatus='stopped';
+  else if(engineUp&&tunUp&&vpnRoute&&healthy) effectiveStatus='connected';
+  else if(directRoute) effectiveStatus='failover';
+  else if(effectiveStatus==='connecting'||effectiveStatus==='starting') effectiveStatus='connecting';
+  else effectiveStatus='degraded';
+  const view=Object.assign({},s,{status:effectiveStatus});
+  const c=statusCopy(view);$('heroTitle').textContent=c[0];$('heroDesc').textContent=c[1];
+  const connected=effectiveStatus==='connected';
+  setDot('vpnDot',connected?'ok':effectiveStatus==='failover'?'warn':'bad');setDot('healthDot',healthy?'ok':effectiveStatus==='failover'?'warn':'bad');
+  $('vpnPill').textContent='VPN · '+(connected?t('active'):effectiveStatus||'—');$('healthPill').textContent='Health · '+(s.health_state||'—');
   $('updatePill').textContent=formatClock();
   const m=locMeta(s.location);$('heroFlag').textContent=m.flag;$('heroCountry').textContent=m.country;$('heroNode').textContent=m.code+(m.node?' · '+m.node:'');
   $('trafficMode').textContent=s.traffic_mode==='exact'?t('exact'):t('vpnOnlyMeasured');
@@ -672,9 +682,9 @@ function renderStatus(s){
   $('svcDns').textContent='Cloudflare Family';setHealthDot('svcDnsDot',connected?'ok':'warn');
   $('svcRoute').textContent=s.default_dev||'—';$('svcRouteSub').textContent=(s.default_dev||'—')+' / table 250';setHealthDot('svcRouteDot',s.default_dev==='tun0'?'ok':s.default_dev==='ppp258'?'warn':'bad');
 
-  const stopped=s.status==='stopped'||(!s.openvpn_pid&&!s.tun_ip);
+  const stopped=effectiveStatus==='stopped';
   if($('powerBtn')){
-    $('powerBtn').dataset.action=stopped?'restart':'stop';
+    $('powerBtn').dataset.action=stopped?'repair':'stop';
     $('powerBtn').textContent=stopped?t('start'):t('stop');
     $('powerBtn').className='btn '+(stopped?'primary':'danger');
     $('powerTitle').textContent=stopped?t('start'):t('stop');
