@@ -73,13 +73,13 @@ case "$state" in
 esac
 
 echo
+if [ -z "$pid" ] && [ -z "$tun_ip" ] && echo "$def" | grep -q "dev $WAN_DEV"; then
+    echo "VERDICT=STOPPED_OR_DIRECT pass=$ok warn=$warn fail=$bad"
+    exit 1
+fi
 if [ "$bad" -gt 0 ]; then
     echo "VERDICT=DEGRADED pass=$ok warn=$warn fail=$bad"
     exit 2
-fi
-if [ -z "$pid" ] && echo "$def" | grep -q "dev $WAN_DEV"; then
-    echo "VERDICT=STOPPED_OR_DIRECT pass=$ok warn=$warn fail=$bad"
-    exit 1
 fi
 if [ "$warn" -gt 0 ]; then
     echo "VERDICT=CHECK_WARNINGS pass=$ok warn=$warn fail=$bad"
