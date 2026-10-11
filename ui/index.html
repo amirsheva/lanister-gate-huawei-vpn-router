@@ -38,6 +38,17 @@ body{margin:0;background:
 button,input,select{font:inherit}
 button{cursor:pointer}
 .mono,[dir=ltr],code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace!important;font-variant-numeric:tabular-nums}
+.clock-pill{font-family:Kalameh,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;min-width:82px;justify-content:center;font-weight:700}
+.truth-title{font-size:14px;font-weight:800;margin-top:20px}
+.truth-sub{font-size:9px;color:var(--muted);margin-top:3px}
+.truth-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+.truth-item{border:1px solid var(--line);border-radius:16px;background:var(--surface2);padding:12px;min-height:78px}
+.truth-k{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9px;color:var(--muted)}
+.truth-v{margin-top:7px;font-size:11px;font-weight:800;word-break:break-word}
+.truth-mark{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.truth-mark.ok{background:var(--green);box-shadow:0 0 0 4px rgba(82,215,174,.10)}
+.truth-mark.warn{background:var(--amber)}
+.truth-mark.bad{background:var(--red)}
 .shell{width:min(1240px,calc(100% - 34px));margin:auto}
 .hidden{display:none!important}
 .svg-icon{width:24px;height:24px;display:block}
@@ -227,7 +238,7 @@ main{padding:28px 0 42px}
       <div class="hero-meta">
         <span class="pill"><span class="dot" id="vpnDot"></span><span id="vpnPill">VPN —</span></span>
         <span class="pill"><span class="dot" id="healthDot"></span><span id="healthPill">Health —</span></span>
-        <span class="pill mono" dir="ltr" id="updatePill">--:--:--</span>
+        <span class="pill clock-pill" dir="ltr" id="updatePill">--:--:--</span>
       </div>
       <div class="actions">
         <button class="btn primary" id="controlBtn">
@@ -413,7 +424,7 @@ main{padding:28px 0 42px}
       <div class="control-grid">
         <div class="control-card"><div class="iconbox green"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 111.9 5.2M4 17v-5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="control-title" data-i18n="repair">Repair</div><div class="control-sub" data-i18n="repairSub">بررسی و راه‌اندازی مجدد اجزای لازم</div><button class="btn" data-action="repair">Repair</button></div>
         <div class="control-card"><div class="iconbox blue"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M7 7a7 7 0 119.8 10M7 7v5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="control-title" data-i18n="restart">Restart</div><div class="control-sub" data-i18n="restartSub">راه‌اندازی مجدد تونل و Watchdog</div><button class="btn" data-action="restart">Restart</button></div>
-        <div class="control-card"><div class="iconbox"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><rect x="5" y="5" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/></svg></div><div class="control-title" data-i18n="stop">Stop</div><div class="control-sub" data-i18n="stopSub">خاموش کردن سرویس VPN</div><button class="btn danger" data-action="stop">Stop</button></div>
+        <div class="control-card" id="powerCard"><div class="iconbox" id="powerIcon"><svg class="svg-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3v8M7.1 6.6a8 8 0 109.8 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="control-title" id="powerTitle" data-i18n="stop">توقف</div><div class="control-sub" id="powerSub" data-i18n="stopSub">خاموش کردن سرویس VPN</div><button class="btn danger" id="powerBtn" data-action="stop">Stop</button></div>
       </div>
     </div>
   </div>
@@ -432,6 +443,18 @@ main{padding:28px 0 42px}
       <div class="tech-item"><div class="tech-k">IPv4 Firewall</div><div class="tech-v mono" id="techFw4">—</div></div>
       <div class="tech-item"><div class="tech-k">IPv6 Firewall</div><div class="tech-v mono" id="techFw6">—</div></div>
     </div>
+
+    <div class="truth-title" data-i18n="truthTitle">واقعیت مسیر</div>
+    <div class="truth-sub" data-i18n="truthSub">این بخش فقط وضعیت‌های قابل اثبات را نشان می‌دهد؛ عدد تخمینی به‌عنوان واقعیت نمایش داده نمی‌شود.</div>
+    <div class="truth-grid">
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthVpn">VPN engine</span><span class="truth-mark" id="truthVpnMark"></span></div><div class="truth-v" id="truthVpn">—</div></div>
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthRoute">International route</span><span class="truth-mark" id="truthRouteMark"></span></div><div class="truth-v mono" id="truthRoute">—</div></div>
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthIran">Iran route</span><span class="truth-mark" id="truthIranMark"></span></div><div class="truth-v mono" id="truthIran">—</div></div>
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthTraffic">Traffic counters</span><span class="truth-mark" id="truthTrafficMark"></span></div><div class="truth-v" id="truthTraffic">—</div></div>
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthEgress">Public egress</span><span class="truth-mark" id="truthEgressMark"></span></div><div class="truth-v mono" id="truthEgress">—</div></div>
+      <div class="truth-item"><div class="truth-k"><span data-i18n="truthDns">DNS</span><span class="truth-mark" id="truthDnsMark"></span></div><div class="truth-v" id="truthDns">—</div></div>
+    </div>
+
     <div class="section-head" style="margin-top:18px"><div><div class="section-title" style="font-size:14px">Logs</div><div class="section-sub">Recent OpenVPN / service events</div></div><button class="btn" id="reloadLogs">↻</button></div>
     <pre class="logs" id="logsBox">—</pre>
   </div>
@@ -458,7 +481,8 @@ fa:{
   switchLocation:'تغییر موقعیت VPN',chooseLocation:'انتخاب موقعیت VPN',chooseLocationSub:'کشور خروجی ترافیک بین‌الملل را انتخاب کنید',
   currentConnection:'اتصال فعلی',cancel:'انصراف',selectLocation:'یک موقعیت انتخاب کنید',connectTo:'اتصال به',
   stepPrepare:'آماده‌سازی',stepTunnel:'تونل',stepHealth:'سلامت',stepDone:'اتصال',
-  controlSub:'عملیات سرویس VPN و بازیابی اتصال',repair:'بازیابی',repairSub:'بررسی و راه‌اندازی مجدد اجزای لازم',restart:'راه‌اندازی مجدد',restartSub:'راه‌اندازی مجدد تونل و Watchdog',stop:'توقف',stopSub:'خاموش کردن سرویس VPN',
+  controlSub:'عملیات سرویس VPN و بازیابی اتصال',repair:'بازیابی',repairSub:'بررسی و راه‌اندازی مجدد اجزای لازم',restart:'راه‌اندازی مجدد',restartSub:'راه‌اندازی مجدد تونل و Watchdog',start:'راه‌اندازی',startSub:'فعال کردن دوباره تونل و Watchdog',stop:'توقف',stopSub:'خاموش کردن VPN و انتقال امن به مسیر مستقیم',
+  truthTitle:'واقعیت مسیر',truthSub:'فقط وضعیت‌های قابل اثبات نمایش داده می‌شوند؛ عدد تخمینی به‌عنوان واقعیت نشان داده نمی‌شود.',truthVpn:'موتور VPN',truthRoute:'مسیر بین‌الملل',truthIran:'مسیر ایران',truthTraffic:'شمارنده ترافیک',truthEgress:'IP خروجی عمومی',truthDns:'DNS',vpnOnlyMeasured:'فقط VPN اندازه‌گیری شده',unknown:'نامشخص',
   connected:'VPN متصل است',connectedDesc:'ترافیک بین‌الملل از تونل VPN عبور می‌کند و ترافیک ایران مستقیم است.',
   failover:'VPN در حالت پشتیبان است',failoverDesc:'مسیر VPN سالم نیست و روتر از مسیر مستقیم پشتیبان استفاده می‌کند.',
   stopped:'VPN متوقف است',stoppedDesc:'سرویس VPN خاموش است.',connecting:'در حال اتصال VPN…',connectingDesc:'تونل در حال راه‌اندازی و بررسی سلامت است.',
@@ -480,7 +504,8 @@ en:{
   switchLocation:'Switch VPN location',chooseLocation:'Choose VPN location',chooseLocationSub:'Choose the exit country for international traffic',
   currentConnection:'Current connection',cancel:'Cancel',selectLocation:'Select a location',connectTo:'Connect to',
   stepPrepare:'Prepare',stepTunnel:'Tunnel',stepHealth:'Health',stepDone:'Connected',
-  controlSub:'VPN service actions and recovery',repair:'Repair',repairSub:'Check and restart required components',restart:'Restart',restartSub:'Restart tunnel and watchdog',stop:'Stop',stopSub:'Stop the VPN service',
+  controlSub:'VPN service actions and recovery',repair:'Repair',repairSub:'Check and restart required components',restart:'Restart',restartSub:'Restart tunnel and watchdog',start:'Start',startSub:'Start the tunnel and watchdog again',stop:'Stop',stopSub:'Stop VPN and fail safely to the direct path',
+  truthTitle:'Traffic truth',truthSub:'Only verifiable state is shown; estimated values are never presented as fact.',truthVpn:'VPN engine',truthRoute:'International route',truthIran:'Iran route',truthTraffic:'Traffic counters',truthEgress:'Public egress IP',truthDns:'DNS',vpnOnlyMeasured:'VPN measured only',unknown:'Unknown',
   connected:'VPN is connected',connectedDesc:'International traffic uses the VPN tunnel while Iran traffic remains direct.',
   failover:'VPN is on fallback',failoverDesc:'The VPN path is unhealthy and the router is using its direct fallback.',
   stopped:'VPN is stopped',stoppedDesc:'The VPN service is disabled.',connecting:'Connecting VPN…',connectingDesc:'The tunnel is starting and being health-checked.',
@@ -576,23 +601,62 @@ function updateTraffic(s){
     const dt=Math.max(.5,(now-previousTs)/1000);
     const vpnRx=Math.max(0,(+s.vpn_rx_bytes-(+previous.vpn_rx_bytes))*8/dt);
     const vpnTx=Math.max(0,(+s.vpn_tx_bytes-(+previous.vpn_tx_bytes))*8/dt);
-    const wanRx=Math.max(0,(+s.wan_rx_bytes-(+previous.wan_rx_bytes))*8/dt);
-    const wanTx=Math.max(0,(+s.wan_tx_bytes-(+previous.wan_tx_bytes))*8/dt);
-    let directRx,directTx,estimated=s.traffic_mode!=='exact'||s.status!=='connected';
-    if(s.traffic_mode==='exact'&&s.status==='connected'){
-      directRx=Math.max(0,(+s.direct_rx_bytes-(+previous.direct_rx_bytes))*8/dt);
-      directTx=Math.max(0,(+s.direct_tx_bytes-(+previous.direct_tx_bytes))*8/dt);estimated=false;
-    }else if(s.status==='connected'){
-      directRx=Math.max(0,wanRx-vpnRx*1.04);directTx=Math.max(0,wanTx-vpnTx*1.04);
-      const cut=Math.max(64000,(vpnRx+vpnTx)*.055);if(directRx+directTx<cut){directRx=0;directTx=0}
-    }else{directRx=wanRx;directTx=wanTx}
-    const v=vpnRx+vpnTx,d=directRx+directTx,scale=Math.max(1,v,d);
-    const vp=rateParts(v),dp=rateParts(d);
-    $('vpnRate').textContent=vp.value;$('vpnUnit').textContent=vp.unit;$('vpnMood').textContent=mood(v);$('vpnFill').style.width=Math.max(v>1000?5:0,Math.min(100,v/scale*100))+'%';
-    $('directRate').textContent=dp.value;$('directUnit').textContent=dp.unit;$('directMood').textContent=mood(d);$('directApprox').classList.toggle('hidden',!estimated);$('directFill').style.width=Math.max(d>1000?5:0,Math.min(100,d/scale*100))+'%';
-    vpnHistory.push(v);directHistory.push(d);if(vpnHistory.length>30)vpnHistory.shift();if(directHistory.length>30)directHistory.shift();setSpark('vpnSpark',vpnHistory);setSpark('directSpark',directHistory);
+    const v=vpnRx+vpnTx;
+    const exact=s.traffic_mode==='exact';
+    let d=null;
+    if(exact){
+      const directRx=Math.max(0,(+s.direct_rx_bytes-(+previous.direct_rx_bytes))*8/dt);
+      const directTx=Math.max(0,(+s.direct_tx_bytes-(+previous.direct_tx_bytes))*8/dt);
+      d=directRx+directTx;
+    }
+    const vp=rateParts(v);
+    $('vpnRate').textContent=vp.value;$('vpnUnit').textContent=vp.unit;$('vpnMood').textContent=mood(v);
+    $('vpnFill').style.width=v>1000?'100%':'0%';
+    vpnHistory.push(v);if(vpnHistory.length>30)vpnHistory.shift();setSpark('vpnSpark',vpnHistory);
+
+    if(d===null){
+      $('directRate').textContent='—';$('directUnit').textContent='';$('directMood').textContent=t('unknown');
+      $('directApprox').classList.remove('hidden');$('directFill').style.width='0%';
+      directHistory.push(0);
+    }else{
+      const dp=rateParts(d);const scale=Math.max(1,v,d);
+      $('vpnFill').style.width=Math.max(v>1000?5:0,Math.min(100,v/scale*100))+'%';
+      $('directRate').textContent=dp.value;$('directUnit').textContent=dp.unit;$('directMood').textContent=mood(d);
+      $('directApprox').classList.add('hidden');$('directFill').style.width=Math.max(d>1000?5:0,Math.min(100,d/scale*100))+'%';
+      directHistory.push(d);
+    }
+    if(directHistory.length>30)directHistory.shift();setSpark('directSpark',directHistory);
   }
   previous={...s};previousTs=now;
+}
+function setTruthMark(id,state){const e=$(id);if(!e)return;e.className='truth-mark '+(state==='ok'?'ok':state==='warn'?'warn':state==='bad'?'bad':'')}
+function formatClock(){
+  try{return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-GB',{timeZone:'Asia/Tehran',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())}
+  catch{return new Date().toLocaleTimeString()}
+}
+function renderTruth(s){
+  const connected=s.status==='connected',healthy=s.health_state==='healthy',tun=s.default_dev==='tun0',direct=s.default_dev==='ppp258';
+  $('truthVpn').textContent=s.openvpn_pid&&s.tun_ip?('PID '+s.openvpn_pid+' · tun0 '+s.tun_ip):(s.openvpn_pid?'OpenVPN PID '+s.openvpn_pid:t('stopped'));
+  setTruthMark('truthVpnMark',s.openvpn_pid&&s.tun_ip?'ok':s.openvpn_pid?'warn':'bad');
+
+  $('truthRoute').textContent=s.route_test_international||s.international_route||(tun?'table 250 → tun0':direct?'table 250 → ppp258':'—');
+  setTruthMark('truthRouteMark',connected&&healthy&&tun?'ok':direct?'warn':'bad');
+
+  $('truthIran').textContent=s.route_test_iran||s.iran_route||(s.iran_count?('Iran prefixes '+s.iran_count+' → ppp258'):'policy prefixes → ppp258');
+  setTruthMark('truthIranMark',s.iran_route_ok===false?'bad':(connected||direct?'ok':'warn'));
+
+  const nat=s.nat_vpn_packets??s.nat_packets??null;
+  $('truthTraffic').textContent=s.traffic_mode==='exact'
+    ? (lang==='fa'?'شمارنده مستقیم و VPN دقیق':'Exact VPN and direct counters')
+    : (nat!==null?('VPN NAT packets '+nat+' · '+t('vpnOnlyMeasured')):t('vpnOnlyMeasured'));
+  setTruthMark('truthTrafficMark',s.traffic_mode==='exact'?'ok':'warn');
+
+  const egress=[s.egress_ip,s.egress_country].filter(Boolean).join(' · ');
+  $('truthEgress').textContent=egress||'—';
+  setTruthMark('truthEgressMark',egress?'ok':'warn');
+
+  $('truthDns').textContent=s.dns_state||s.dns_status||'Cloudflare Family · not actively verified';
+  setTruthMark('truthDnsMark',(s.dns_ok===true)?'ok':(s.dns_ok===false?'bad':'warn'));
 }
 function renderStatus(s){
   lastStatus=s;csrf=s.csrf||csrf;
@@ -600,13 +664,25 @@ function renderStatus(s){
   const connected=s.status==='connected';const healthy=s.health_state==='healthy';
   setDot('vpnDot',connected?'ok':s.status==='failover'?'warn':'bad');setDot('healthDot',healthy?'ok':s.health_state==='failover'?'warn':'bad');
   $('vpnPill').textContent='VPN · '+(connected?t('active'):s.status||'—');$('healthPill').textContent='Health · '+(s.health_state||'—');
-  $('updatePill').textContent=new Date().toLocaleTimeString(lang==='fa'?'fa-IR':'en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  $('updatePill').textContent=formatClock();
   const m=locMeta(s.location);$('heroFlag').textContent=m.flag;$('heroCountry').textContent=m.country;$('heroNode').textContent=m.code+(m.node?' · '+m.node:'');
-  $('trafficMode').textContent=s.traffic_mode==='exact'?t('exact'):t('estimated');
+  $('trafficMode').textContent=s.traffic_mode==='exact'?t('exact'):t('vpnOnlyMeasured');
   $('svcVpn').textContent=s.openvpn_pid?t('active'):'—';$('svcVpnSub').textContent='PID '+(s.openvpn_pid||'—');setHealthDot('svcVpnDot',s.openvpn_pid?'ok':'bad');
   $('svcWd').textContent=s.watchdog_pid?t('active'):'—';$('svcWdSub').textContent='PID '+(s.watchdog_pid||'—');setHealthDot('svcWdDot',s.watchdog_pid?'ok':'bad');
   $('svcDns').textContent='Cloudflare Family';setHealthDot('svcDnsDot',connected?'ok':'warn');
   $('svcRoute').textContent=s.default_dev||'—';$('svcRouteSub').textContent=(s.default_dev||'—')+' / table 250';setHealthDot('svcRouteDot',s.default_dev==='tun0'?'ok':s.default_dev==='ppp258'?'warn':'bad');
+
+  const stopped=s.status==='stopped'||(!s.openvpn_pid&&!s.tun_ip);
+  if($('powerBtn')){
+    $('powerBtn').dataset.action=stopped?'restart':'stop';
+    $('powerBtn').textContent=stopped?t('start'):t('stop');
+    $('powerBtn').className='btn '+(stopped?'primary':'danger');
+    $('powerTitle').textContent=stopped?t('start'):t('stop');
+    $('powerSub').textContent=stopped?t('startSub'):t('stopSub');
+    $('powerIcon').className='iconbox '+(stopped?'green':'');
+  }
+
+  renderTruth(s);
   updateTraffic(s);
 }
 async function api(path,opt){
